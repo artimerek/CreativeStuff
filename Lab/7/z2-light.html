@@ -1,0 +1,127 @@
+<html>
+  <head>
+      <title>Light</title>
+      <meta name="author" content="Darin Nikolow">
+      <style>
+       body { margin: 0; }
+       canvas { display: block; }
+      </style>
+  </head>
+  <body onkeypress = "keypress()">
+    <script src="../three.js"></script>
+    <script>
+     var scene = new THREE.Scene();
+     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+     
+     const loader = new THREE.TextureLoader();
+
+
+     renderer = new THREE.WebGLRenderer();
+     renderer.setSize( window.innerWidth, window.innerHeight );
+     renderer.shadowMap.enabled = true;
+     document.body.appendChild( renderer.domElement );
+     
+     var geometry = new THREE.CylinderGeometry(0.5, 0.5, 2);
+     var material = new THREE.MeshLambertMaterial( {map: loader.load('tire.jpg') } );
+     var cylinder = new THREE.Mesh( geometry, material );
+     cylinder.castShadow = true;
+     cylinder.rotation.x = 1.5;
+
+	 var circle= new THREE.Mesh(geometry,material);
+	 circle.castShadow= true;
+	 circle.rotation.x = Math.PI/2;
+	 circle.position.y = -0.5;
+	 circle.position.x = -1;
+
+	 var circle2= new THREE.Mesh(geometry,material);
+	 circle2.castShadow= true;
+	 circle2.rotation.x = Math.PI/2;
+	 circle2.position.y = -0.5;
+	 circle2.position.x = 2;
+
+	 var geometry2 =new THREE.BoxGeometry(3,0.5,5);
+	 var material2=new THREE.MeshLambertMaterial({map: loader.load('steel.jpg')});
+	 var cube = new THREE.Mesh(geometry2,material2);
+	 cube.castShadow = true;
+	 cube.position.x = -0.5;
+	 cube.position.y = 0.25;
+   cube.position.z = 0; 
+   cube.rotation.y  = Math.PI/2;
+		
+	 var directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0 );
+     scene.add( directionalLight );
+     directionalLight.castShadow = true;
+     directionalLight.position.x = 1;
+     directionalLight.position.z = 1;
+
+     camera.position.z = 6;
+
+	 var group = new THREE.Group();
+	 group.add(circle)
+	 group.add(circle2)
+	 group.add(cube);
+	 scene.add(group);
+
+   
+
+   var latest = '';
+
+
+     var floorGeometry = new THREE.PlaneGeometry(12, 12);
+     var floorMaterial = new THREE.MeshLambertMaterial( { map: loader.load('road.jpg')}  );
+     var floor = new THREE.Mesh( floorGeometry, floorMaterial );
+     scene.add(floor);
+     floor.rotation.x = -Math.PI/2.0;
+     floor.position.y = -1.0;
+     floor.receiveShadow = true;
+
+     var anim = false; 
+
+     var animate = function () {
+         if (anim){
+             requestAnimationFrame( animate );
+         } 
+
+         group.translateX(0.01);
+         circle2.rotation.y+=0.01;
+         circle.rotation.y+=0.01;
+	  
+	   
+	   renderer.render( scene, camera );
+     };
+     document.body.addEventListener("keydown", keyDown);
+   function keyDown(e) {
+
+e = e || window.event;
+
+{
+        if(e.keyCode==32)
+        {
+          anim = !anim;  
+       if(anim)
+        animate();
+        }
+
+      };
+ 
+
+if (e.keyCode == '38') {
+  
+}
+else if (e.keyCode == '37') {
+  group.rotation.y+=0.01;      
+
+}
+else if (e.keyCode == '39') {
+  group.rotation.y-=0.01;
+  
+}
+
+
+}
+
+     animate();
+
+    </script>
+  </body>
+  </html>>

@@ -1,0 +1,101 @@
+<html>
+  <head>
+      <title>Light</title>
+      <meta name="author" content="Darin Nikolow">
+      <style>
+       body { margin: 0; }
+       canvas { display: block; }
+      </style>
+  </head>
+  <body onkeypress = "keypress()">
+    <script src="../three.js"></script>
+    <script>
+     var scene = new THREE.Scene();
+     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+     
+     renderer = new THREE.WebGLRenderer();
+     renderer.setSize( window.innerWidth, window.innerHeight );
+     renderer.shadowMap.enabled = true;
+     document.body.appendChild( renderer.domElement );
+     
+     var geometry = new THREE.CylinderGeometry(0.5, 0.5, 2);
+     var material = new THREE.MeshLambertMaterial( { color: 0xFF6F00 } );
+     var cylinder = new THREE.Mesh( geometry, material );
+     //scene.add( cylinder );
+     cylinder.castShadow = true;
+     cylinder.rotation.x = 1.5;
+
+	 var kolo1= new THREE.Mesh(geometry,material);
+	 kolo1.castShadow= true;
+	 kolo1.rotation.x = Math.PI/2;
+	 kolo1.position.y = -0.5;
+	 kolo1.position.x = -1;
+
+	 var kolo2= new THREE.Mesh(geometry,material);
+	 kolo2.castShadow= true;
+	 kolo2.rotation.x = Math.PI/2;
+	 kolo2.position.y = -0.5;
+	 kolo2.position.x = 2;
+
+	 var geometry2 =new THREE.BoxGeometry(3,0.5)
+	 var material2=new THREE.MeshLambertMaterial({colora:0x00ff00});
+	 var cube = new THREE.Mesh(geometry2,material2);
+	 cube.castShadow = true;
+	 cube.position.x = 0.5;
+	 cube.position.y = 0.25; 
+		
+	 var directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0 );
+     scene.add( directionalLight );
+     directionalLight.castShadow = true;
+     directionalLight.position.x = 1;
+     directionalLight.position.z = 1;
+
+     camera.position.z = 6;
+
+	 var group = new THREE.Group();
+	 group.add(kolo1)
+	 group.add(kolo2)
+	 group.add(cube);
+	 scene.add(group);
+	 
+	 
+
+     var floorGeometry = new THREE.PlaneGeometry(6, 6);
+     var floorMaterial = new THREE.MeshLambertMaterial( { color: 0x00ffff } );
+     var floor = new THREE.Mesh( floorGeometry, floorMaterial );
+     scene.add(floor);
+     floor.rotation.x = -Math.PI/2.0;
+     floor.position.y = -1.0;
+     floor.receiveShadow = true;
+
+     var anim = true; 
+
+     var animate = function () {
+         if (anim){
+             requestAnimationFrame( animate );
+         } 
+	  
+	   cylinder.rotation.y += 0.009;
+	   
+	   renderer.render( scene, camera );
+     };
+	 document.addEventListener("keydown",moves);
+	 function moves(event){
+		 var keyCode = event.code;
+		 if(keyCode=="ArrowDown"){
+			 group.position.x += 0.02;
+			 kolo1.rotation.y -= 0.05;
+			 kolo2.rotation.y -= 0.05;
+		 }
+		 if(keyCode=="ArrowUp"){
+			 group.position.x -= 0.02;
+			 kolo1.rotation.y += 0.05;
+			 kolo2.rotation.y += 0.05;
+		 }
+	 }
+
+     animate();
+
+    </script>
+  </body>
+  </html>>
