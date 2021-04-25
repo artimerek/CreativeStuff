@@ -1,0 +1,108 @@
+<html>
+  <head>
+      <title>Light</title>
+      <meta name="author" content="Darin Nikolow">
+      <style>
+       body { margin: 0; }
+       canvas { display: block; }
+      </style>
+  </head>
+  <body>
+    <script src="../three.js"></script>
+    <script>
+     var scene = new THREE.Scene();
+     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+     
+     renderer = new THREE.WebGLRenderer();
+     renderer.setSize( window.innerWidth, window.innerHeight );
+     renderer.shadowMap.enabled = true;
+     document.body.appendChild( renderer.domElement );
+     
+     var geometry = new THREE.BoxGeometry();
+     var material = new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
+     var cube = new THREE.Mesh( geometry, material );
+     scene.add( cube );
+     cube.castShadow = true;
+
+
+     const sphereGeometry = new THREE.SphereGeometry( 5, 32, 32 );
+      const sphereMaterial = new THREE.MeshPhongMaterial( {color: "rgb(0, 0, 255)"} );
+      const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+      scene.add( sphere );
+      sphere.scale.set(0.1,0.1,0.1);
+      sphere.castShadow = true;
+     
+      const torusGeometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
+      const torusMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+      const torus = new THREE.Mesh( torusGeometry, torusMaterial );
+      scene.add( torus );
+      torus.castShadow = true;
+
+      torus.scale.set(0.006,0.006,0.006);
+
+
+     var directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0 );
+     scene.add( directionalLight );
+     directionalLight.castShadow = true;
+     directionalLight.position.x = 1;
+     directionalLight.position.z = 1;
+
+     camera.position.z = 5;
+
+     var floorGeometry = new THREE.PlaneGeometry(5, 5);
+     var floorMaterial = new THREE.MeshLambertMaterial( { color: 0x00ffff } );
+     var floor = new THREE.Mesh( floorGeometry, floorMaterial );
+     scene.add(floor);
+     floor.rotation.x = -Math.PI/2.0;
+     floor.position.y = -1.0;
+     floor.receiveShadow = true;
+
+     var t = 0;
+     var isIt = true;
+     var isItw = true;
+     let a=0,b=0,c=0;
+
+     var animate = function () {
+	 requestAnimationFrame( animate );	 
+   t += 0.01;          
+	 cube.rotation.x += 0.01;
+	 cube.rotation.y += 0.01;
+      if(isIt)
+        sphere.position.y+= 0.01;
+      if(!isIt)
+        sphere.position.y-=0.01;
+
+    if(sphere.position.y >= 2)
+    isIt = false;
+
+    if(sphere.position.y <= 0.01)
+    isIt = true;
+
+    if(isItw)
+    a=b=c+=0.001;
+
+    if(!isItw)
+    a=b=c-=0.001;
+    
+
+    if(a>=0.08&&b>=0.08&&c>=0.08)
+      isItw = false;
+    
+    if(a<=0.01&&b<=0.01&&c<=0.01)
+      isItw = true;
+
+
+
+  torus.scale.set(a,b,c);
+    
+  
+    cube.position.x = 2 * Math.cos(t) + 0;
+  cube.position.z = 2 * Math.sin(t) + 0;
+
+	 renderer.render( scene, camera );
+     };
+     
+     animate();
+    </script>
+  </body>
+</html>

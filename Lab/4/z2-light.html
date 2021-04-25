@@ -1,0 +1,274 @@
+<html>
+  <head>
+    <title>Light</title>
+    <meta name="author" content="Darin Nikolow" />
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="128" height="128"></canvas>
+    <canvas id="myCube" width="128" height="128"></canvas>
+    <canvas id="myCube2" width="128" height="128"></canvas>
+    <canvas id="myCube3" width="128" height="128"></canvas>
+    <canvas id="myCube4" width="128" height="128"></canvas>
+    <canvas id="myCube5" width="128" height="128"></canvas>
+    <canvas id="myCube6" width="128" height="128"></canvas>
+    <script src="../three.js"></script>
+    <script>
+
+      // Board
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#FFF";
+      ctx.fillRect(0, 0, 64, 64);
+      ctx.fillStyle = "#FFF";
+      ctx.fillRect(64, 64, 64, 64);
+      canvas.style.display="none";
+
+      // 1
+      var canvas2 = document.getElementById("myCube");
+      var ctx = canvas2.getContext("2d");
+      ctx.fillStyle = "	#FFFFFF";
+      ctx.fillRect(0, 0, 128, 128);
+      ctx.beginPath();
+      ctx.arc(64,64, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+
+      //6
+      var canvas3 = document.getElementById("myCube2");
+      var ctx = canvas3.getContext("2d");
+      ctx.fillStyle = "	#FFFFFF";
+      ctx.fillRect(0, 0, 128, 128);
+      ctx.beginPath();
+      ctx.arc(96,64, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(96,32, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(32,32, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(32,64, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(96,96, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(32,96, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+
+      // 2
+      var canvas4 = document.getElementById("myCube3");
+      var ctx = canvas4.getContext("2d");
+      ctx.fillStyle = "	#FFFFFF";
+      ctx.fillRect(0, 0, 128, 128);
+      ctx.beginPath();
+      ctx.arc(32,32, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(96,96, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+
+      //3
+      var canvas5 = document.getElementById("myCube4");
+      var ctx = canvas5.getContext("2d");
+      ctx.fillStyle = "	#FFFFFF";
+      ctx.fillRect(0, 0, 128, 128);
+      ctx.beginPath();
+      ctx.arc(64,64, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(32,32, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(96,96, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+
+      //5
+      var canvas6 = document.getElementById("myCube5");
+      var ctx = canvas6.getContext("2d");
+      ctx.fillStyle = "	#FFFFFF";
+      ctx.fillRect(0, 0, 128, 128);
+      ctx.beginPath();
+      ctx.arc(64,64, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(32,32, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(96,96, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(32,96, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(96,32, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+
+      var canvas7 = document.getElementById("myCube6");
+      var ctx = canvas7.getContext("2d");
+      ctx.fillStyle = "	#FFFFFF";
+      ctx.fillRect(0, 0, 128, 128);
+      ctx.beginPath();
+      ctx.arc(32,32, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(96,96, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(32,96, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(96,32, 5, 0, 2 * Math.PI,false);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.stroke();
+
+
+      canvas7.style.display="none";
+      canvas6.style.display="none";
+      canvas5.style.display="none";
+      canvas4.style.display="none";
+      canvas3.style.display="none";
+      canvas2.style.display="none";
+      canvas.style.display="none";
+
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      texture.repeat.set(4, 4);
+
+      const texture2 = new THREE.CanvasTexture(canvas2);
+      const texture3 = new THREE.CanvasTexture(canvas3);
+      const texture4 = new THREE.CanvasTexture(canvas4);
+      const texture5 = new THREE.CanvasTexture(canvas5);
+      const texture6 = new THREE.CanvasTexture(canvas6);
+      const texture7 = new THREE.CanvasTexture(canvas7);
+   
+      
+
+      var materials = [
+      new THREE.MeshLambertMaterial({map:texture2}),
+      new THREE.MeshLambertMaterial({map:texture3}),
+      new THREE.MeshLambertMaterial({map:texture4}),
+      new THREE.MeshLambertMaterial({map:texture5}),
+       new THREE.MeshLambertMaterial({map:texture7})
+    ];
+
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+
+      renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.shadowMap.enabled = true;
+      document.body.appendChild(renderer.domElement);
+
+
+      var geometry = new THREE.BoxGeometry();
+      var material = new THREE.MeshLambertMaterial({ color: 0xffffff });
+      var cube = new THREE.Mesh(geometry, materials);
+      scene.add(cube);
+      cube.castShadow = true;
+
+      var directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
+      scene.add(directionalLight);
+      directionalLight.castShadow = true;
+      directionalLight.position.x = 1;
+      directionalLight.position.z = 1;
+
+      camera.position.z = 5;
+
+      var floorGeometry = new THREE.PlaneGeometry(5, 5);
+      var floorMaterial = new THREE.MeshLambertMaterial({
+        map: texture
+      });
+      var floor = new THREE.Mesh(floorGeometry, floorMaterial);
+      scene.add(floor);
+      floor.rotation.x = -Math.PI / 2.0;
+      floor.position.y = -1.0;
+      floor.receiveShadow = true;
+      var animate = function () {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+      };
+
+      animate();
+    </script>
+  </body>
+</html>
